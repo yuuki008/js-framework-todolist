@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jquery ToDo</title>
+</head>
+<body>
+  <div>
+    <div>
+      <h2>Jquery Todo</h2>
+    </div>
+    <div style="margin: 30px">
+      <div style="display: column">
+        <div style="display: flex" >
+          <input type="text" style="height: 20px;" >
+          <button type="submit" style="height: 25px">Add</button>
+        </div>
+        <ul style="display: flex; list-style: none; padding: 0;">
+          <li><button type="submit">すべて</button></li>
+          <li><button type="submit">未完タスク一覧</button></li>
+          <li><button type="submit">完了タスク一覧</button></li>
+        </ul>
+      </div>
+      <ul max-width="400" style="padding: 0;">
+        <li style="display: flex">
+          <div style="padding: 10px">
+            <input type="checkbox">
+          </div>
+          <div style="padding: 10px">
+          </div>
+          <button style="margin: 10px">delete</button>
+          <button style="margin: 10px">edit</button>
+          <div style="margin: 10px" class='update__text'>
+            <input type="text" >
+            <button>submit</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="todo.js"></script>
+</body>
+</html>
