@@ -1,21 +1,18 @@
-const path = require('path')
-
+const path = require('path');
 module.exports = {
-  mode: 'development',
-  entry: './src/index.js',
-  output: {
-    path: `${__dirname}/dist`,
-    filename: 'main.js'
+  // モジュールバンドルを行う起点となるファイルの指定
+  // 指定できる値としては、ファイル名の文字列や、それを並べた配列やオブジェクト
+  // 下記はオブジェクトとして指定した例
+  entry: {
+    bundle: './src/index.js'
   },
-  module: {
-    rules: [{
-      test: /\.js$/,
-      exclude: /node_modules/,
-      loader: 'babel-loader',
-    }]
+  // モジュールバンドルを行った結果を出力する場所やファイル名の指定
+  output: {
+    path: path.join(__dirname, 'dist'), // "__dirname"はファイルが存在するディレクトリ
+    filename: '[name].js'  // [name]はentryで記述した名前（この設定ならbundle）
   },
   devServer: {
-    contentBase: path.resolve(__dirname, 'dist'),
-    port: 3000,
-  }
-};
+    contentBase: path.join(__dirname, 'dist'), // webpack-dev-serverの公開フォルダ
+    open: true // サーバー起動時にブラウザを開く
+  },
+}

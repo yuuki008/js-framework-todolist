@@ -1,6 +1,5 @@
-const helloWorld = () => {
-  alert('Hello World!!')
-}
-console.log('ちんちん')
+const { default: World } = require("./world")
 
-helloWorld()
+const root = document.getElementById("root")
+const world = new World("JQuery Todo")
+world.sayHello(root)
