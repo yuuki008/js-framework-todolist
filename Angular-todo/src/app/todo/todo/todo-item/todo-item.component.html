@@ -1,0 +1,36 @@
+<li style="display: flex">
+  <div style="padding: 10px">
+    <input
+    type="checkbox"
+    [checked]="todo.isComplete"
+    (click)="isCompleteToggle(todo)"
+    >
+  </div>
+  <div style="padding: 10px">
+  {{ todo.todo }}
+  </div>
+  <button
+    style="margin: 10px"
+    (click)="deleteTodo(todo.id)"
+  >
+    delete
+  </button>
+  <button
+  style="margin: 10px"
+  (click)="edit=!edit"
+  >
+  edit
+  </button>
+  <div style="margin: 10px" class='update__text' *ngIf="edit">
+    <input
+      type="text"
+      id="update-todo-form"
+      (input)="inputUpdateTodo($event.target.value)"
+    >
+    <button
+      (click)="updateTodo(todo)"
+    >
+    submit
+  </button>
+  </div>
+</li>
