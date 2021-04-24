@@ -13,6 +13,6 @@ module.exports = {
   },
   devServer: {
     contentBase: path.join(__dirname, 'dist'), // webpack-dev-serverの公開フォルダ
-    open: true // サーバー起動時にブラウザを開く
+    open: false // サーバー起動時にブラウザを開く
   },
 }
