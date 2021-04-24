@@ -10,6 +10,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "@vue/composition-api": "^1.0.0-rc.7",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vuefire": "^2.2.5"

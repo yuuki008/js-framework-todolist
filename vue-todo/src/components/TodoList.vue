@@ -1,29 +1,35 @@
 <template>
-  <div class="pt-3">
-    <input type="text" v-model="newTodo">
-    <button type="submit" v-on:click="addItem()">Add</button>
-    <ul max-width="400" v-for="todo in todos" :key="todo.id">
-      <li style="display: flex">
-        <div style="padding: 10px">
-          <input type="checkbox" v-model="todo.isComplete" v-on:click="IsCompleteToggle(todo)">
-        </div>
-        <div style="padding: 10px">
-        {{ todo.todo }}
-        </div>
-        <button style="margin: 10px" v-on:click="deleteTodo(todo.id)">delete</button>
-      </li>
+  <div style="margin: 30px">
+    <div style="display: column">
+      <div style="display: flex" >
+        <input type="text" style="height: 20px;" v-model="newTodo">
+        <button type="submit" style="height: 25px" v-on:click="addItem()">Add</button>
+      </div>
+      <ul style="display: flex; list-style: none; padding: 0;">
+        <li><button type="submit" v-on:click="showTodoType = 'all'">すべて</button></li>
+        <li><button type="submit" v-on:click="showTodoType = 'active'">未完タスク一覧</button></li>
+        <li><button type="submit" v-on:click="showTodoType = 'complete'">完了タスク一覧</button></li>
+      </ul>
+    </div>
+    <ul max-width="400" style="padding: 0;" v-for="todo in filterTodo" :key="todo.id">
+      <todo-item :todo="todo" :IsCompleteToggle="IsCompleteToggle" :deleteTodo="deleteTodo" />
     </ul>
   </div>
 </template>
 <script>
 import { db } from '../db'
+import TodoItem from './TodoItem'
 
 export default {
   name: 'TodoList',
+  components: {
+    TodoItem
+  },
   data() {
     return {
       todos: [],
       newTodo: '',
+      showTodoType: 'all'
     }
   },
   created: function() {
@@ -34,6 +40,22 @@ export default {
       })
       this.todos = newTodos
     })
+  },
+  computed: {
+    filterTodo: function() {
+      if(this.showTodoType == "all") {
+        return this.todos
+      } else {
+        let showIsComplete = false;
+        if(this.showTodoType == 'complete') { showIsComplete = true }
+        let filterTodos = {};
+        for(let key in this.todos) {
+          let todo = this.todos[key];
+          if(todo.isComplete == showIsComplete) { filterTodos[key] = todo; }
+        }
+        return filterTodos;
+      }
+    }
   },
   methods: {
     deleteTodo(id) {

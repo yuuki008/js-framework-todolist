@@ -1,27 +1,51 @@
-
 <template>
-    <div class="todolist">
-        <input class="toggle" type="checkbox" v-model="todo.isComplete" v-on:click="updateIsComplete(todo)">
-        <div class="todo__text">{{todo.name}}</div>
-        <!-- <button v-on:click="deleteTodo(todo)">X</button>
-        <button v-on:click="update=!update">編集</button>
-        <div v-show="update" id="update" class="update__text">
-            <input type="text" v-model="todo.name" placeholder="update todo">
-            <button
-            v-on:click="updateTodo(todo.name, todo)"
-            >完了</button>
-        </div> -->
-    </div>
+  <div>
+      <li style="display: flex">
+        <div style="padding: 10px">
+          <input type="checkbox" v-model="todo.isComplete" v-on:click="IsCompleteToggle(todo)">
+        </div>
+        <div style="padding: 10px">
+        {{ todo.todo }}
+        </div>
+        <button style="margin: 10px" v-on:click="deleteTodo(todo.id)">delete</button>
+        <button style="margin: 10px" v-on:click="edit=!edit" >edit</button>
+        <div v-show="edit" style="margin: 10px" class='update__text'>
+          <input type="text" v-model="updateText" :placeholder="todo.todo" >
+          <button v-on:click="updateTodo(todo, updateText)">submit</button>
+        </div>
+      </li>
+  </div>
 </template>
 
 <script>
-export default  {
+import { db } from '../db'
+import { defineComponent } from '@vue/composition-api'
+
+export default defineComponent ({
   name: 'TodoItem',
-  props: ['todo', 'updateIsComplete', 'deleteTodo', 'updateIsComplete'],
-  data(){
-    return{
+  data() {
+    return {
+      edit: false,
       updateText: "",
-      update: false,
     }
   },
-}
+  props: {
+    todo: {
+      todo: String,
+      id: String,
+      isComplete: Boolean
+    },
+    IsCompleteToggle: Function,
+    deleteTodo: Function
+  },
+  methods: {
+    updateTodo(todo, text) {
+      db.collection('todos').doc(todo.id).set({isComplete: todo.isComplete, todo: text, id: todo.id})
+      .then(() => {
+        this.edit = false
+        this.updateText = ""
+      })
+    }
+  }
+})
+</script>
