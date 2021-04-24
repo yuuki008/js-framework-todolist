@@ -5,20 +5,24 @@
   "main": "todos.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack"
+    "dev": "npx webpack serve",
+    "build": "npx webpack",
+    "watch": "npx webpack --watch"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "firebase": "^8.4.2"
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
+    "firebase": "^8.4.2",
+    "webpack": "^5.35.1",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
     "@babel/core": "^7.13.16",
     "@babel/preset-env": "^7.13.15",
     "babel-loader": "^8.2.2",
-    "jquery": "^3.6.0",
-    "webpack": "^5.35.1",
-    "webpack-cli": "^4.6.0"
+    "jquery": "^3.6.0"
   }
 }
