@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="d-flex align-center">
+    <div>
       <h2>Vue ToDo</h2>
     </div>
 
