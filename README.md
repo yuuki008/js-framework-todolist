@@ -1,4 +1,4 @@
-# js-frameworks-todolist
+# js-framework-todolist
 
 １人前のフロントエンドエンジニアになるべく、いろんなフレームワークに触れてみようのリポジトリです。
 
