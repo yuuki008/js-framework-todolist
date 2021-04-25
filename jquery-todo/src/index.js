@@ -8,18 +8,27 @@ $(document).ready(function () {
         addTodo(inputVal)
       }
   })
+
+
+  $(".is-complete").on('click', function (e) {
+    const type = e.target.id
+    setTypeTodos(type)
+  })
+
   $(".todo-list").on('click', '.delete-todo', function (e) {
     deleteTodo(e.target.id)
   })
 
   $(".todo-list").on('click', '.update-todo', function (e) {
-    console.log(e.target)
     const inputVal = $(`.update${e.target.id}`).val()
     updateTodo(e.target.id, inputVal)
   })
   $(".todo-list").on('click', '.checkbox', function (e) {
-    console.log(e.target.id)
     isCompleteToggle(e.target.id, e.target.checked)
+  })
+
+  $(".todo-list").on('click', '.edit-button', function (e) {
+    $(`.${e.target.id}`).toggle()
   })
 })
 
@@ -39,7 +48,6 @@ const addTodo = (todo) => {
 }
 
 const isCompleteToggle = (id, isComplete) => {
-  console.log('toggle')
   if(!id) return
   db.collection('todos').doc(id).set({
     isComplete: isComplete
@@ -47,7 +55,6 @@ const isCompleteToggle = (id, isComplete) => {
 }
 
 const deleteTodo = (id) => {
-  console.log("delete")
   db.collection('todos').doc(id).delete()
   .then(() => {
     setTodos()
@@ -63,6 +70,28 @@ const updateTodo = (id, inputVal) => {
       $(`.update${id}`).val("")
       setTodos()
   })
+}
+
+const setTypeTodos = (type) => {
+  if (type === 'all') {
+    setTodos()
+  } else {
+    let IsComplete = false
+    if (type === 'complete') IsComplete = true
+    db.collection('todos').get()
+    .then((snapshot) => {
+      let todolist = []
+
+      snapshot.docs.map((doc) => {
+          const data = doc.data()
+          if (data.isComplete === IsComplete) {
+            todolist.push(data)
+          }
+      })
+
+      setTodolistElement(todolist)
+    })
+  }
 }
 
 const setTodos = async () => {
@@ -89,8 +118,8 @@ const setTodolistElement = (todolist) => {
           ${todo.todo}
         </div>
         <button style="margin: 10px" id="${todo.id}" class="delete-todo">delete</button>
-        <button style="margin: 10px">edit</button>
-        <div style="margin: 10px" class='update__text' >
+        <button style="margin: 10px" class="edit-button" id="${todo.id}">edit</button>
+        <div style="margin: 10px" class="${todo.id}" >
           <input type="text" class="update${todo.id}">
           <button class="update-todo" id="${todo.id}">submit</button>
         </div>
