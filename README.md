@@ -2,13 +2,15 @@
 
 １人前のフロントエンドエンジニアになるべく、いろんなフレームワークに触れてみようのリポジトリです。
 
-**[react](https://ja.reactjs.org/)**
+firebaseを使ったtodolistを実装していきます！のちに認証機能を追加していく予定
 
-**[angular](https://angular.jp/)**
+- **[react](https://ja.reactjs.org/)**
 
-**[vue](https://jp.vuejs.org/index.html)**
+- **[angular](https://angular.jp/)**
 
-**[jquery](https://jquery.com/)**
+- **[vue](https://jp.vuejs.org/index.html)**
+
+- **[jquery](https://jquery.com/)**
 
 # 環境構築
 
@@ -37,13 +39,13 @@ $ vue create app-name -> 3.x系
 
 ### jquery
 
-**CDN**
+- **CDN**
 
 ```html
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 ```
 
-**webpack**
+- **webpack**
 
 ```
 $ npm init
