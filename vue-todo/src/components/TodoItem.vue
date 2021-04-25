@@ -19,9 +19,8 @@
 
 <script>
 import { db } from '../db'
-import { defineComponent } from '@vue/composition-api'
 
-export default defineComponent ({
+export default {
   name: 'TodoItem',
   data() {
     return {
@@ -47,5 +46,5 @@ export default defineComponent ({
       })
     }
   }
-})
+}
 </script>
