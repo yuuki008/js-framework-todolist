@@ -8,8 +8,9 @@
     <input type="password" v-model="password" placeholder="password">
     <input type="password" v-model="confirmPassword" placeholder="confirm password">
     <div class="margin-10">
-      <button v-on:click="signUp()">signUp</button>
+      <button v-on:click="signUp()">sign up</button>
     </div>
+    <router-link to="/sign_in">alreday have email</router-link>
   </div>
 </template>
 

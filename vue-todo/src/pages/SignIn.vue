@@ -6,8 +6,9 @@
     <input type="email" v-model="email" placeholder="email">
     <input type="password" v-model="password" placeholder="password">
     <div class="margin-10">
-      <button v-on:click="signIn()">signIn</button>
+      <button v-on:click="signIn()">sign in</button>
     </div>
+    <router-link to="/sign_up">create account</router-link>
   </div>
 </template>
 
@@ -28,11 +29,12 @@ export default {
         alert('必須項目入れんかい')
         return false
       }
-      auth.signInWithEmailAndPassword(this.email, this.password).then((result) => {
+      auth.signInWithEmailAndPassword(this.email, this.password)
+      .then((result) => {
         const user = result.user
         if (user) {
-          const id = user.uid
-          db.collection('users').doc(id).get().then((snapshot) => {
+          db.collection('users').doc(user.uid).get()
+          .then(() => {
             this.$router.push('/')
           })
         }
