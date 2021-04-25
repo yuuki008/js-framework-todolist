@@ -4,26 +4,31 @@ import Todos from './pages/Todo.vue'
 import Home from './pages/Home.vue'
 import SignUp from './pages/SignUp.vue'
 import SignIn from './pages/SignIn.vue'
+
 import './assets/index.css'
 
-import { auth } from './db'
+import { Firebase, auth } from './db'
+import VueRouter from 'vue-router'
 import { db } from '../../jquery-todo/src/db'
-import store from './store'
 
 Vue.use(Router)
 
-const router =  new Router({
-  mode: 'history',
-  routes: [
+const routes = [
     {
       path: '/sign_up',
       name: 'sign_up',
-      component: SignUp
+      component: SignUp,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/sign_in',
       name: 'sign_in',
-      component: SignIn
+      component: SignIn,
+      meta: {
+        requiresAuth: true
+      }
     },
     {
       path: '/',
@@ -35,31 +40,32 @@ const router =  new Router({
       name: 'todos',
       component: Todos
     },
-  ]
+]
+
+
+const router = new VueRouter({
+  mode: 'history',
+  routes
 })
 
-router.beforeEach((to, from, next) => {
-  if (to.path === "/todos" || "/") {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        const id = user.uid
-        db.collection('users').doc(id).get().then((snapshot) => {
-          const data = snapshot.data()
-          if (!data) {
-            alert('ユーザーデータが存在しません')
-            next({ path: 'sign_in' })
-            return
-          }
-          console.log(data)
-          next()
-        })
-      } else {
-        next({ path: 'sign_in'});
-      }
-    })
+router.beforeEach( async (to, from, next) => {
+  const requiresAuth = to.matched.some(recode => recode.meta.requiresAuth);
+  const user = await checkAuth()
+
+  if (!requiresAuth && !user) {
+    next({ path: '/sign_in'});
   } else {
     next()
   }
 })
+
+const checkAuth = () => {
+  return new Promise((resolve, reject) => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      unsubscribe()
+      resolve(user)
+    }, reject)
+  })
+}
 
 export default router
