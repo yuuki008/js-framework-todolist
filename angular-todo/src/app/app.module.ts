@@ -4,12 +4,10 @@ import { TodoModule } from './todo/todo.module'
 import { AppRoutingModule } from './app-routing.module'
 
 import { AppComponent } from './app.component';
-import { AccountComponent } from './account/account/account.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AccountComponent
   ],
   imports: [
     BrowserModule,
