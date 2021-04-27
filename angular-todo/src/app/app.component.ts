@@ -1,12 +1,15 @@
 import { Component } from '@angular/core';
-import './index.css'
+import { SessionService } from './service/session.service';
 
 @Component({
   selector: 'app-root',
   template: `
     <router-outlet></router-outlet>
-  `
+  `,
+  styleUrls: ['./index.css']
 })
 export class AppComponent {
-  title = 'Angular-todo';
+  constructor(private session: SessionService) {
+    this.session.checkLogin();
+  }
 }
