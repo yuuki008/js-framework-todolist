@@ -1,0 +1,31 @@
+<div>
+  <div>
+    <h2>Angular ToDo</h2>
+  </div>
+  <div style="margin: 30px">
+    <div style="display: column">
+      <div style="display: flex" >
+        <input
+          type="text"
+          style="height: 20px;"
+          id="todo-form"
+          (input)="inputTodo($event.target.value)"
+          >
+        <button type="submit" style="height: 25px" (click)="addTodo()">Add</button>
+      </div>
+      <ul style="display: flex; list-style: none; padding: 0;">
+        <li><button type="submit" (click)="setTodoType('all')">すべて</button></li>
+        <li><button type="submit" (click)="setTodoType('active')">未完タスク一覧</button></li>
+        <li><button type="submit" (click)="setTodoType('complete')">完了タスク一覧</button></li>
+      </ul>
+    </div>
+    <ul max-width="400" style="padding: 0;" *ngFor="let todo of todos">
+        <app-todo-item
+          [todo]="todo"
+          [isCompleteToggle]="isCompleteToggle"
+          [deleteTodo]="deleteTodo"
+          [fetchTodo]="fetchTodo"
+        ></app-todo-item>
+    </ul>
+  </div>
+</div>
