@@ -10,7 +10,7 @@ import {
 import { SignUp } from './pages/SignUp';
 import { SignIn } from './pages/SignIn';
 import { Todo } from './pages/Todo';
-import { AuthWrapper } from './AuthWrapper'
+import { UserPage } from './pages/UserPage';
 
 
 render(
@@ -18,11 +18,8 @@ render(
       <Switch>
         <Route exact path="/signup" component={SignUp} />
         <Route exact path="/signin" component={SignIn} />
-        <AuthWrapper>
-          <>
-            <Route exact path="/" component={Todo} />
-          </>
-        </AuthWrapper>
+        <Route exact path="/" component={Todo} />
+        <Route exact path="/mypage" component={UserPage} />
       </Switch>
     </Router>,
   document.getElementById('root')

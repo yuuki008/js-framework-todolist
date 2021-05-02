@@ -24,7 +24,7 @@ export const SignIn = () => {
     }
     auth.signInWithEmailAndPassword(email, password)
     .then((result) => {
-      history.push('/')
+      history.push('/mypage')
     })
     .catch((error) => {
       alert('サインインに失敗しました')
