@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import { db } from './db'
-import { Todolist } from './components/Todolist'
-import { Form } from './components/Form'
+import { db } from '../db'
+import { Todolist } from '../components/Todolist'
+import { Form } from '../components/Form'
 
-export const App = () => {
+export const Todo = () => {
   const [todos, setTodos] = useState([])
   const [todoType, setTodoType] = useState('all')
 
