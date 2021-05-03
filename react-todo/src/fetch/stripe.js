@@ -6,13 +6,15 @@ const headers = new Headers();
 headers.set('Content-type', 'application/json');
 const BASE_URL = 'https://front-todos.web.app';
 
+// test card === 5555 5555 5555 4444 4444444444444
 
-export const registerCard = async (stripe, elements, history) => {
-  const user = await getUserData()
+
+export const registerCard = async (stripe, elements, history, userId) => {
+  const user = await getUserData(userId)
   console.log(user)
+  if (!user) return
   const email = user.email
   const uid = user.id
-  const name = user.name
 
   if (!stripe || !elements) return
 

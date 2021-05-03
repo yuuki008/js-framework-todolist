@@ -5,7 +5,7 @@ const cors = require('cors')
 const sendResponse = (response, statusCode, body) => {
   response.send({
     statusCode,
-    headers: { "Access-Control-Allow-Origin": "*" },
+    headers: {"Access-Control-Allow-Origin": "*"},
     body: JSON.stringify(body)
   });
 };
@@ -41,9 +41,9 @@ exports.stripeCustomer = functions.https.onRequest((req, res) => {
   corsHandler(req, res, () => {
     if (req.method === 'POST') {
       return stripe.customers.create({
-        description: 'yuukis customer',
+        description: "yuuki's customer",
         email: req.body.email,
-        metadata: { userId: req.body.userId },
+        metadata: {userId: req.body.userId},
         payment_method: req.body.paymentMethod,
       }).then((customer) => {
         sendResponse(res, 200, customer);

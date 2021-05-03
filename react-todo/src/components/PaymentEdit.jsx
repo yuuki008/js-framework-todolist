@@ -1,18 +1,19 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from "styled-components";
 import TextDetail from './uikit/TextDetail'
 import { registerCard } from '../fetch/stripe'
 
-export const PaymentEdit = () => {
+export const PaymentEdit = ({ user }) => {
   const history = useHistory()
   const stripe = useStripe() // クライアントでstripeの情報がもてるhooks
   const elements = useElements() // Elementsコンポーネントに渡したstripeの情報をもらえる（wrappingした公開キーとかも？）
 
   const register = useCallback(() => {
-    registerCard(stripe, elements)
+    registerCard(stripe, elements, history, user.id)
   }, [stripe, elements])
+
 
   return (
     <Wrapper>

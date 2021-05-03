@@ -1,0 +1,14 @@
+[debug] [2021-05-03T15:14:03.598Z] ----------------------------------------------------------------------
+[debug] [2021-05-03T15:14:03.601Z] Command:       /Users/yu-home/.nodebrew/node/v14.4.0/bin/node /Users/yu-home/.nodebrew/current/bin/firebase deploy
+[debug] [2021-05-03T15:14:03.602Z] CLI Version:   9.2.0
+[debug] [2021-05-03T15:14:03.602Z] Platform:      darwin
+[debug] [2021-05-03T15:14:03.602Z] Node Version:  v14.4.0
+[debug] [2021-05-03T15:14:03.606Z] Time:          Tue May 04 2021 00:14:03 GMT+0900 (日本標準時)
+[debug] [2021-05-03T15:14:03.607Z] ----------------------------------------------------------------------
+[debug] [2021-05-03T15:14:03.607Z] 
+[debug] [2021-05-03T15:14:03.617Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2021-05-03T15:14:03.617Z] > authorizing via signed-in user
+[debug] [2021-05-03T15:14:03.618Z] [iam] checking project front-todos for permissions ["cloudfunctions.functions.create","cloudfunctions.functions.delete","cloudfunctions.functions.get","cloudfunctions.functions.list","cloudfunctions.functions.update","cloudfunctions.operations.get","datastore.indexes.create","datastore.indexes.delete","datastore.indexes.list","datastore.indexes.update","firebase.projects.get","firebasedatabase.instances.update","firebasehosting.sites.update","firebaserules.releases.create","firebaserules.releases.update","firebaserules.rulesets.create"]
+[debug] [2021-05-03T15:14:03.621Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2021-05-03T15:14:03.621Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
