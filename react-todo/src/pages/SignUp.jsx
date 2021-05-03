@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
-import { auth, timestamp, db } from '../db'
 import { useHistory } from 'react-router-dom'
+import { signUp } from '../fetch/index'
 
 export const SignUp = () => {
   const history = useHistory()
@@ -26,37 +26,6 @@ export const SignUp = () => {
     setConfirmPassword(e.target.value)
   }, [setConfirmPassword])
 
-  const signUp = () => {
-    if (name === '' || email === "" || password === "") {
-      alert('必須項目が未入力です')
-      return false
-    }
-    if (password !== confirmPassword) {
-      alert('パスワードが一致しません')
-      return false
-    }
-    auth.createUserWithEmailAndPassword(email, password).then((result) => {
-      const user = result.user
-      if (user) {
-        const id = user.uid
-        const userData = {
-          id: id,
-          email: email,
-          name: name,
-          created_at: timestamp.now()
-        }
-        db.collection('users').doc(id).set(userData)
-        .then(() => {
-          history.push('/')
-        })
-        .catch((error) => {
-          alert('新規作成に失敗しました')
-          console.log(error)
-        })
-      }
-    })
-  }
-
   return (
     <Wrapper>
       <h2>sign_up</h2>
@@ -65,7 +34,7 @@ export const SignUp = () => {
       <Input type="password" value={password} placeholder="password" onChange={(e) => inputPassword(e)}/>
       <Input type="password" value={confirmPassword} placeholder="confirm password" onChange={(e) => inputConfirmPassword(e)} />
       <SubmitWrapper>
-        <SubmitButton onClick={() => signUp(name, email, password, confirmPassword)}>sign up</SubmitButton>
+        <SubmitButton onClick={() => signUp(name, email, password, confirmPassword, history)}>sign up</SubmitButton>
       </SubmitWrapper>
     </Wrapper>
   )

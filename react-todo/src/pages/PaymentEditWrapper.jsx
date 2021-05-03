@@ -9,7 +9,7 @@ const stripePromise = loadStripe(STRIPE_PUBLIC_KEY)
 export const PaymentEditWrapper = () => {
   return (
     <Elements stripe={stripePromise}>
-
+      <PaymentEdit/>
     </Elements>
   )
 }

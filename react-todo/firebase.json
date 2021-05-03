@@ -12,6 +12,28 @@
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "v1/customer",
+        "functions": "stripeCustomer"
+      },
+      {
+        "source": "/v1/paymentMethod",
+        "function": "retrievePaymentMethod"
+      },
+      {
+        "source": "/v1/updatePaymentMethod",
+        "function": "updatePaymentMethod"
+      },
+      {
+        "source": "/v1/createPaymentIntent",
+        "function": "createPaymentIntent"
+      },
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
     ]
   },
   "storage": {

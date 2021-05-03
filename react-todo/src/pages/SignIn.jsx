@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
-import { auth } from '../db'
 import { useHistory } from 'react-router-dom'
+import { signIn } from '../fetch/index'
 
 export const SignIn = () => {
   const history = useHistory()
@@ -16,29 +16,13 @@ export const SignIn = () => {
     setPassword(e.target.value)
   }, [setPassword])
 
-
-  const signIn = () => {
-    if (email === "" || password === "") {
-      alert('必須項目が未入力です')
-      return false
-    }
-    auth.signInWithEmailAndPassword(email, password)
-    .then((result) => {
-      history.push('/mypage')
-    })
-    .catch((error) => {
-      alert('サインインに失敗しました')
-      console.log(error)
-    })
-  }
-
   return (
     <Wrapper>
       <h2>sign_in</h2>
       <Input type="email" value={email} placeholder="email" onChange={(e) => inputEmail(e)}/>
       <Input type="password" value={password} placeholder="password" onChange={(e) => inputPassword(e)}/>
       <SubmitWrapper>
-        <SubmitButton onClick={() => signIn(email, password)}>sign in</SubmitButton>
+        <SubmitButton onClick={() => signIn(email, password, history)}>sign in</SubmitButton>
       </SubmitWrapper>
     </Wrapper>
   )

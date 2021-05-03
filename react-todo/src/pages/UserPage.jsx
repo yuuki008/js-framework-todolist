@@ -24,7 +24,9 @@ export const UserPage = () => {
           <h2>{user?.name}</h2>
           <div>{user?.email}</div>
           <div className="center">
-            <button label={"カード情報の編集"} onClick={() => history.push('/user/payment/edit')} />
+            <Button onClick={() => history.push('/user/payment/edit')} >
+              カード情報の編集
+            </Button>
           </div>
         </>
       )}
@@ -39,3 +41,9 @@ const Wrapper = styled.div`
   margin: 20px auto;
 `
 
+const Button = styled.button`
+  margin: 10px 0;
+  padding: 5px;
+  font-weight: 500;
+  font-size: 16px;
+`
