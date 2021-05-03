@@ -11,6 +11,7 @@ import { SignUp } from './pages/SignUp';
 import { SignIn } from './pages/SignIn';
 import { Todo } from './pages/Todo';
 import { UserPage } from './pages/UserPage';
+import { PaymentEditWrapper } from './pages/PaymentEditWrapper'
 
 
 render(
@@ -20,6 +21,7 @@ render(
         <Route exact path="/signin" component={SignIn} />
         <Route exact path="/" component={Todo} />
         <Route exact path="/mypage" component={UserPage} />
+        <Route exact path="/user/payment/edit" component={PaymentEditWrapper} />
       </Switch>
     </Router>,
   document.getElementById('root')

@@ -5,7 +5,6 @@ import styled from 'styled-components'
 
 export const UserPage = () => {
   const history = useHistory()
-
   const [user, setUserData] = useState({})
 
   const getUserData = async () => {
@@ -24,6 +23,9 @@ export const UserPage = () => {
         <>
           <h2>{user?.name}</h2>
           <div>{user?.email}</div>
+          <div className="center">
+            <button label={"カード情報の編集"} onClick={() => history.push('/user/payment/edit')} />
+          </div>
         </>
       )}
     </Wrapper>
