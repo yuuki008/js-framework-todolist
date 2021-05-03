@@ -2,8 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { db } from '../db'
 import { Todolist } from '../components/Todolist'
 import { Form } from '../components/Form'
+import { listenAuthState } from '../fetch'
+import { useHistory } from 'react-router-dom'
 
 export const Todo = () => {
+  const history = useHistory()
+
   const [todos, setTodos] = useState([])
   const [todoType, setTodoType] = useState('all')
 
@@ -59,9 +63,18 @@ export const Todo = () => {
     }
   }
 
+  const getUserData = async () => {
+    const data = await listenAuthState()
+    if (!data) return history.push('/signin')
+  }
+
   useEffect(() => {
     changeTodoType()
   }, [todoType, updateTodo])
+
+  useEffect(() => {
+    getUserData()
+  }, [])
 
   return (
     <div>

@@ -10,12 +10,8 @@ export const UserPage = () => {
 
   const getUserData = async () => {
     const data = await listenAuthState()
-    console.log(data)
-    if (data) {
-      setUserData(data)
-    } else {
-      history.push('/signin')
-    }
+    if (!data) return history.push('/signin')
+    setUserData(data)
   }
 
   useEffect(() => {
