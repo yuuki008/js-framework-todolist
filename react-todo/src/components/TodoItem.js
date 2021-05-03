@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import { isCompleteToggle, deleteTodo, updateTodo } from '../fetch/todo'
 
-export const TodoItem = ({ todo, user }) => {
+export const TodoItem = ({ todo, user, setTodos }) => {
   const [text, setText] = useState("")
   const [edit, setEdit] = useState(false)
 
@@ -16,7 +16,7 @@ export const TodoItem = ({ todo, user }) => {
           <input
             type="checkbox"
             checked={todo.isComplete}
-            onClick={() => isCompleteToggle(todo)}
+            onChange={() => isCompleteToggle(todo, setTodos)}
           />
         </div>
         <div style={{ padding: '10px' }}>
@@ -24,7 +24,7 @@ export const TodoItem = ({ todo, user }) => {
         </div>
         <button
           style={{ margin: '10px' }}
-          onClick={() => deleteTodo(todo.id, user.id)}
+          onClick={() => deleteTodo(todo.id, user.id, setTodos)}
         >
           delete
         </button>
@@ -42,7 +42,7 @@ export const TodoItem = ({ todo, user }) => {
               onChange={(event) => inputText(event)}
             />
             <button
-              onClick={() => updateTodo(todo, text, setText, setEdit)}
+              onClick={() => updateTodo(todo, text, setText, setEdit, setTodos)}
             >
               submit
             </button>

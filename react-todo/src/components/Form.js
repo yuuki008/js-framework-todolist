@@ -1,7 +1,7 @@
 import React, { useState, useCallback } from 'react'
 import { todoPost } from '../fetch/todo'
 
-export const Form = ({ setTodoType, todoType, user }) => {
+export const Form = ({ setTodoType, todoType, user, setTodos }) => {
   const [todo, setTodo] = useState('')
 
   const inputTodo = useCallback((event) => {
@@ -19,7 +19,7 @@ export const Form = ({ setTodoType, todoType, user }) => {
         <button
           type="submit"
           style={{ height:'25px' }}
-          onClick={() => todoPost(user.id, todo, setTodo)}
+          onClick={() => todoPost(user.id, todo, setTodo, setTodos)}
         >
           Add
         </button>

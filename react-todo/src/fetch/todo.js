@@ -3,7 +3,7 @@ import { db } from '../db'
 const todosRef = db.collection('todos')
 const usersRef = db.collection('users')
 
-export const todoPost = (userId, todo, setTodo) => {
+export const todoPost = (userId, todo, setTodo, setTodos) => {
   const ref = todosRef.doc()
   const todoId = ref.id
   todosRef.doc(todoId).set({
@@ -12,39 +12,48 @@ export const todoPost = (userId, todo, setTodo) => {
     todo: todo,
     isComplete: false
   })
-  .then(() => {
+  .then(async() => {
     setTodo('')
+    const newTodos = await todosFetch()
+    setTodos(newTodos)
     usersRef.doc(userId).collection('todos').doc(todoId).set({ id: todoId })
   })
 }
 
-export const deleteTodo = (id, userId) => {
+export const deleteTodo = (id, userId, setTodos) => {
   todosRef.doc(id).delete()
-  .then(() => {
+  .then(async() => {
     usersRef.doc(userId).collection('todos').doc(id).delete()
+    const newTodos = await todosFetch()
+    setTodos(newTodos)
   })
 }
 
-export const isCompleteToggle = (todo) => {
+export const isCompleteToggle = (todo, setTodos) => {
   todosRef.doc(todo.id).set({ isComplete: !todo.isComplete }, { merge: true })
+  .then(async () => {
+      const newTodos = await todosFetch()
+      setTodos(newTodos)
+  })
 }
 
-export const updateTodo = (todo, text, setText, setEdit) => {
+export const updateTodo = (todo, text, setText, setEdit, setTodos) => {
   todosRef.doc(todo.id).set({ todo: text }, { merge: true })
-  .then(() => {
+    .then(async() => {
+    const newTodos = await todosFetch()
+    setTodos(newTodos)
     setText('')
     setEdit(false)
   })
 }
 
 export const changeTodoType = async (todoType) => {
+  const todolist = await todosFetch()
   if (todoType === "all") {
-    const todolist = await todosFetch()
     return todolist
   } else {
     let showIsComplete = false
     if (todoType === 'complete') { showIsComplete = true }
-    const todolist = await todosFetch()
     const filterTodos = todolist.filter(todo => todo.isComplete === showIsComplete)
     return filterTodos
   }

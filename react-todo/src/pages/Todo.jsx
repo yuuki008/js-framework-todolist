@@ -3,7 +3,7 @@ import { Todolist } from '../components/Todolist'
 import { Form } from '../components/Form'
 import { listenAuthState } from '../fetch'
 import { useHistory } from 'react-router-dom'
-import { changeTodoType, updateTodo } from '../fetch/todo'
+import { changeTodoType, updateTodo, todoPost } from '../fetch/todo'
 
 export const Todo = () => {
   const history = useHistory()
@@ -37,8 +37,8 @@ export const Todo = () => {
         <h2>React ToDo</h2>
       </div>
       <div style={{ margin: "30px"}}>
-        <Form setTodoType={setTodoType} todoType={todoType} />
-        <Todolist todos={todos} user={user}/>
+        <Form setTodoType={setTodoType} todoType={todoType} user={user} setTodos={setTodos}/>
+        <Todolist todos={todos} user={user} setTodos={setTodos}/>
       </div>
     </div>
   )
