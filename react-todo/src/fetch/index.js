@@ -39,6 +39,7 @@ export const signUp = (name, email, password, confirmPassword, history) => {
       const userData = {
         id: id,
         email: email,
+        customer_id: "",
         payment_method_id: "",
         name: name,
         created_at: timestamp.now()

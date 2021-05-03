@@ -1,13 +1,19 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from "styled-components";
 import TextDetail from './uikit/TextDetail'
+import { registerCard } from '../fetch/stripe'
 
 export const PaymentEdit = () => {
   const history = useHistory()
-  // const stripe = useStripe()
-  // const element = useElements()
+  const stripe = useStripe() // クライアントでstripeの情報がもてるhooks
+  const elements = useElements() // Elementsコンポーネントに渡したstripeの情報をもらえる（wrappingした公開キーとかも？）
+
+  const register = useCallback(() => {
+    registerCard(stripe, elements)
+  }, [stripe, elements])
+
   return (
     <Wrapper>
       <Title>クレジットカード情報の登録・編集</Title>
@@ -44,7 +50,7 @@ export const PaymentEdit = () => {
         </CardDetailWrapper>
         <ButtonWrapper>
           <button
-            onClick={() => alert('今は無理ーーー')}
+            onClick={register}
           >
             カード情報を登録する
           </button>
