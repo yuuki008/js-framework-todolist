@@ -2,17 +2,18 @@ import { db, auth } from "../db"
 
 const usersRef = db.collection('users')
 
-export const listenAuthState = async() => {
-  const user = auth.currentUser
-  if (user) {
-    const data = await usersRef.doc(user.uid).get()
-    .then((snapshot) => snapshot.data())
-    .catch(() => null)
-    console.log(data)
-    return data
-  } else {
-    return null
-  }
+export const listenAuthState = async () => {
+  return new Promise(resolve => {
+    return auth.onAuthStateChanged(async (user) => {
+      if (!user) return resolve(null)
+      usersRef.doc(user.uid).get()
+        .then((snapshot) => {
+          const data = snapshot.data()
+          resolve(data)
+        })
+        .catch(() => resolve(null))
+    })
+  })
 }
 
 export const getUserData = async (id) => {
