@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
-import { db } from '../db'
+import { isCompleteToggle, deleteTodo, updateTodo } from '../fetch/todo'
 
-export const TodoItem = ({ todo, deleteTodo, isCompleteToggle, updateTodo }) => {
+export const TodoItem = ({ todo, user }) => {
   const [text, setText] = useState("")
   const [edit, setEdit] = useState(false)
 
@@ -24,7 +24,7 @@ export const TodoItem = ({ todo, deleteTodo, isCompleteToggle, updateTodo }) => 
         </div>
         <button
           style={{ margin: '10px' }}
-          onClick={() => deleteTodo(todo.id)}
+          onClick={() => deleteTodo(todo.id, user.id)}
         >
           delete
         </button>

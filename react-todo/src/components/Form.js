@@ -1,25 +1,12 @@
 import React, { useState, useCallback } from 'react'
-import { db } from '../db'
+import { todoPost } from '../fetch/todo'
 
-export const Form = ({ setTodoType, todoType }) => {
+export const Form = ({ setTodoType, todoType, user }) => {
   const [todo, setTodo] = useState('')
 
   const inputTodo = useCallback((event) => {
     setTodo(event.target.value)
   }, [setTodo])
-
-  const todoPost = () => {
-    const ref = db.collection('todos').doc()
-    const todoId = ref.id
-    db.collection('todos').doc(todoId).set({
-      id: todoId,
-      todo: todo,
-      isComplete: false
-    })
-    .then(() => {
-      setTodo('')
-    })
-  }
 
   return (
     <div style={{ display: 'column' }}>
@@ -32,7 +19,7 @@ export const Form = ({ setTodoType, todoType }) => {
         <button
           type="submit"
           style={{ height:'25px' }}
-          onClick={() => todoPost()}
+          onClick={() => todoPost(user.id, todo, setTodo)}
         >
           Add
         </button>
