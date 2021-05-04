@@ -1,6 +1,5 @@
 import React from 'react';
 import {render} from 'react-dom';
-import * as History from 'history'
 import {
   BrowserRouter as Router,
   Switch,

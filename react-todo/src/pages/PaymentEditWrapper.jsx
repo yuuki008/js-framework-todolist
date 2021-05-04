@@ -5,7 +5,8 @@ import { PaymentEdit } from '../components/PaymentEdit'
 import { listenAuthState } from '../fetch/index'
 import { useHistory } from 'react-router-dom'
 
-const STRIPE_PUBLIC_KEY = "pk_test_51ImD5GB8X8CGc8BDF73kN7CxlmzRmOds4alnZIQyJ9vNvl4KYcrErNfeuR8TtL5A2sVlkRof24ZGsom2vNVu6XKw00zCjXOEnJ"
+const STRIPE_PUBLIC_KEY = process.env.REACT_APP_STRIPE_API_KEY
+console.log(STRIPE_PUBLIC_KEY)
 const stripePromise = loadStripe(STRIPE_PUBLIC_KEY)
 
 

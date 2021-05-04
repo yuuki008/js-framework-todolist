@@ -1,5 +1,5 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from "styled-components";
 import TextDetail from './uikit/TextDetail'
