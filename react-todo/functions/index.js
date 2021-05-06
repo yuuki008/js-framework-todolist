@@ -23,7 +23,7 @@ exports.createPaymentIntent= functions.https.onRequest((req, res) => {
       confirm: true,
       currency: 'JPY',
       customer: req.body.customerId,
-      metadata: {idempotencyKey: req.body.paymentMethodId}, // 冪等性を保つ＝二重決済を防ぐために、この決済でkeyとなる値を渡す
+      metadata: {idempotencyKey: req.body.paymentMethodId},
       payment_method: req.body.paymentMethodId
     }).then((paymentIntent) => {
       sendResponse(res, 200, paymentIntent);
