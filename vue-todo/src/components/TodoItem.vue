@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     updateTodo(todo, text) {
-      db.collection('todos').doc(todo.id).set({isComplete: todo.isComplete, todo: text, id: todo.id})
+      db.collection('todos').doc(todo.id).set({ todo: text }, { merge: true })
       .then(() => {
         this.edit = false
         this.updateText = ""
